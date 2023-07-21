@@ -1,15 +1,8 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+import snscrape.modules.twitter as sntwitter
+import pandas as pd
 
-# Set Chrome options to run in headless mode
-chrome_options = Options()
-chrome_options.add_argument("--headless")
-chrome_options.add_argument("--no-sandbox")
-chrome_options.add_argument("--disable-dev-shm-usage")
+query = 'Arima Kana'
 
-driver = webdriver.Chrome(options=chrome_options)
-driver.get("https://schedule.hololive.tv/")
-
-driver.implicitly_wait(10)
-driver.save_screenshot("screenshot.png")
-driver.quit()
+for tweet in sntwitter.TwitterSearchScraper(query).get_items():
+    print(tweet)
+    break
